@@ -115,7 +115,7 @@ if user_menu == 'Overall Analysis':
 #--------------------------Line Chart-> No. of Events Over the Years----------------------------------------------------
     st.title("Events over the years")
     
-    events_over_time = helper.data_over_time(df, 'Event')
+    events_over_time = helper.events_over_time(df, 'Event')
     #st.dataframe(events_over_time)
     
     events_over_time = events_over_time.sort_values('Event')  #here event is for year
