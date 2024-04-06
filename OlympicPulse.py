@@ -106,9 +106,9 @@ if user_menu == 'Overall Analysis':
     nations_over_time = helper.data_over_time(df, 'Region')
     st.dataframe(nations_over_time)
     
-    nations_over_time = nations_over_time.sort_values('Region')  
+    nations_over_time = nations_over_time.sort_values('Editions')  
  
-    fig = px.line(nations_over_time, x="Region", y="count")
+    fig = px.line(nations_over_time, x="Edition", y="Participating Nations")
     
     st.plotly_chart(fig)
 
