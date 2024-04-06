@@ -30,11 +30,11 @@ To run the OlympicPulse application, execute the following command in your termi
 Access the application through your web browser at the provided local address. Choose from various analysis options available in the sidebar menu.
 
 # Files
-OlympicPulse.py:  Main code file containing the Streamlit web application.
+**1. OlympicPulse.py** :  Main code file containing the Streamlit web application.
 
-preprocessor.py: Python script for preprocessing the dataset, filtering for summer Olympics, and adding necessary columns.
+**2. preprocessor.py** : Python script for preprocessing the dataset, filtering for summer Olympics, and adding necessary columns.
 
-helper.py: Contains utility functions used in the project for data analysis and visualization.
+**3. helper.py** : Contains utility functions used in the project for data analysis and visualization.
 
 # Libraries Used
 **1. Streamlit**: Used for building interactive web applications with Python.
