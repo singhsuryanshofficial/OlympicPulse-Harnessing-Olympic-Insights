@@ -37,15 +37,17 @@ preprocessor.py: Python script for preprocessing the dataset, filtering for summ
 helper.py: Contains utility functions used in the project for data analysis and visualization.
 
 # Libraries Used
-Streamlit: Used for building interactive web applications with Python.
+**1. Streamlit**: Used for building interactive web applications with Python.
 
-Plotly: Provides interactive and publication-quality plots.
+**2. Plotly**: Provides interactive and publication-quality plots.
 
-Seaborn: Data visualization library based on Matplotlib, offers a high-level interface for drawing attractive statistical graphics.
+**3. Seaborn**: Data visualization library based on Matplotlib, offers a high-level interface for drawing attractive statistical graphics.
 
-Matplotlib: Comprehensive library for creating static, animated, and interactive visualizations in Python.
+**4. Matplotlib**: Comprehensive library for creating static, animated, and interactive visualizations in Python.
 
-NumPy: Library for numerical computing in Python.
+**5. Pandas**: Data manipulation and analysis library, providing data structures and functions for working with structured data.
+
+**6. NumPy**: Library for numerical computing in Python.
 
 # Features
 Medal Tally: View medal tallies for different countries in various Olympic editions.
