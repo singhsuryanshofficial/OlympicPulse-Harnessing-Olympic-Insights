@@ -77,7 +77,7 @@ def data_over_time(df, col):
 
 def athletes_over_time(df):
     athlete_over_time = df.drop_duplicates(['Year', 'Name' ])['Year'].value_counts().reset_index()
-    athlete_over_time.rename(columns={'index': 'Edition', 'Year': 'Participating Athletes'} ,inplace= True) #inplace=True loads the chart in same place
+    athlete_over_time.rename(columns={'count': 'Participating Athletes', 'Year': 'Edition'} ,inplace= True) #inplace=True loads the chart in same place
     return athlete_over_time
 
 #--------------------------Function: Most successful atheles in particular sport----------------------------------------
