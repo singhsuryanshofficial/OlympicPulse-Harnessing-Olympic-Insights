@@ -108,7 +108,7 @@ if user_menu == 'Overall Analysis':
     nations_over_time = nations_over_time.sort_values('Region')
     st.dataframe(nations_over_time)
     
-    fig = px.line(nations_over_time, x="Edition", y="Region")
+    fig = px.line(nations_over_time, x="Region", y="count")
     
     st.plotly_chart(fig)
 
