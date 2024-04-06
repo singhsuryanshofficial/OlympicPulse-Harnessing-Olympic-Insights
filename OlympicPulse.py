@@ -115,16 +115,22 @@ if user_menu == 'Overall Analysis':
     st.title("Events over the years")
     
     events_over_time = helper.data_over_time(df, 'Event')
-    events_over_time = events_over_time.sort_values('Event')  #here event is for year
     #st.dataframe(events_over_time)
+    
+    events_over_time = events_over_time.sort_values('Event')  #here event is for year
     fig = px.line(events_over_time, x="Event", y="count")
     st.plotly_chart(fig)
 
 #--------------------------Line Chart-> No. of Athletes Over the Years--------------------------------------------------
+    st.title("Number of athletes over the years")
+    
     athlete_over_time = helper.athletes_over_time(df)
     
+    st.dataframe(athlete_over_time)
+    athlete_over_time = athlete_over_time.sort_values('')  #here event is for year
+    
+    
     fig = px.line(athlete_over_time, x="Edition", y="Participating Athletes")
-    st.title("Number of athletes over the years")
     st.plotly_chart(fig)
 #--------------------------HeatMap-> No. of Events of one sport---------------------------------------------------------
     st.title("Number of events in all sports over time")
