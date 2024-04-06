@@ -119,7 +119,7 @@ if user_menu == 'Overall Analysis':
     st.dataframe(events_over_time)
     
     events_over_time = events_over_time.sort_values('Event')  #here event is for year
-    fig = px.line(events_over_time, x="Event", y="count")
+    fig = px.line(events_over_time, x="Edition", y="Total Events")
     st.plotly_chart(fig)
 
 #--------------------------Line Chart-> No. of Athletes Over the Years--------------------------------------------------
