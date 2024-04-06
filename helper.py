@@ -72,7 +72,7 @@ def data_over_time(df, col):
     # removing duplicate rows for Year and col
     nations_over_time = df.drop_duplicates(['Year', col ])['Year'].value_counts().reset_index()
     #renaming columns
-    nations_over_time.rename(columns={'index': 'Edition', 'Year': col} ,inplace= True) #inplace=True loads the chart in same place
+    nations_over_time.rename(columns={'count': 'Participating Nations', 'Year': 'Edition'} ,inplace= True) #inplace=True loads the chart in same place
     return nations_over_time
 
 def athletes_over_time(df):
