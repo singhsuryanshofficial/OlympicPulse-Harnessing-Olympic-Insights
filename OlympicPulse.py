@@ -124,7 +124,7 @@ if user_menu == 'Overall Analysis':
 #--------------------------Line Chart-> No. of Athletes Over the Years--------------------------------------------------
     st.title("Number of athletes over the years")
     
-    athlete_over_time = helper.athletes_over_time(df)
+    athlete_over_time = helper.athlete_over_time(df)
     
     st.dataframe(athlete_over_time)
     athlete_over_time = athlete_over_time.sort_values('')  #here event is for year
