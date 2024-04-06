@@ -103,9 +103,10 @@ if user_menu == 'Overall Analysis':
     st.dataframe(df)
 
     st.title("Participating nations over the years")
+    st.dataframe(nations_over_time)
     nations_over_time = helper.data_over_time(df, 'Region')
-    #st.dataframe(nations_over_time)
-    nations_over_time = nations_over_time.sort_values('Region')  # here region will show year and count will show no. of regions
+    
+    nations_over_time = nations_over_time.sort_values('Region')  
  
     fig = px.line(nations_over_time, x="Region", y="count")
     
