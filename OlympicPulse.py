@@ -106,7 +106,7 @@ if user_menu == 'Overall Analysis':
     nations_over_time = helper.data_over_time(df, 'Region')
     st.dataframe(nations_over_time)
     
-    nations_over_time = nations_over_time.sort_values('Editions')  
+    nations_over_time = nations_over_time.sort_values('Edition')  
  
     fig = px.line(nations_over_time, x="Edition", y="Participating Nations")
     
