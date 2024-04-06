@@ -75,10 +75,18 @@ def data_over_time(df, col):
     nations_over_time.rename(columns={'count': 'Participating Nations', 'Year': 'Edition'} ,inplace= True) #inplace=True loads the chart in same place
     return nations_over_time
 
+def events_over_time(df, col):
+    # removing duplicate rows for Year and col
+    event_over_time = df.drop_duplicates(['Year', col ])['Year'].value_counts().reset_index()
+    #renaming columns
+    event_over_time.rename(columns={'count': 'Total Events', 'Year': 'Edition'} ,inplace= True) #inplace=True loads the chart in same place
+    return event_over_time
+
 def athletes_over_time(df):
     athlete_over_time = df.drop_duplicates(['Year', 'Name' ])['Year'].value_counts().reset_index()
     athlete_over_time.rename(columns={'count': 'Participating Athletes', 'Year': 'Edition'} ,inplace= True) #inplace=True loads the chart in same place
     return athlete_over_time
+
 
 #--------------------------Function: Most successful atheles in particular sport----------------------------------------
 
