@@ -99,12 +99,15 @@ if user_menu == 'Overall Analysis':
         st.title(athletes)
 
 #--------------------------Line Chart-> Participating Nations Over Time-------------------------------------------------
+    st.title("Overall Athlete Data")
     st.dataframe(df)
+
+    st.title("Participating nations over the years")
     nations_over_time = helper.data_over_time(df, 'Region')
     
     #st.dataframe(nations_over_time)
     fig = px.line(nations_over_time, x="Edition", y="Region")
-    st.title("Participating nations over the years")
+    
     st.plotly_chart(fig)
 
 #--------------------------Line Chart-> No. of Events Over the Years----------------------------------------------------
