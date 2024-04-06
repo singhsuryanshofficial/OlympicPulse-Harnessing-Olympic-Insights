@@ -128,7 +128,7 @@ if user_menu == 'Overall Analysis':
     athlete_over_time = helper.athletes_over_time(df)
     
     st.dataframe(athlete_over_time)
-    athlete_over_time = athlete_over_time.sort_values('')  #here event is for year
+    athlete_over_time = athlete_over_time.sort_values('Edition')  #here event is for year
     
     
     fig = px.line(athlete_over_time, x="Edition", y="Participating Athletes")
