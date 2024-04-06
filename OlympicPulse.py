@@ -104,8 +104,8 @@ if user_menu == 'Overall Analysis':
 
     st.title("Participating nations over the years")
     nations_over_time = helper.data_over_time(df, 'Region')
-
-    nations_over_time = nations_over_time.sort_values('Region')
+    #st.dataframe(nations_over_time)
+    nations_over_time = nations_over_time.sort_values('Region')  # here region will show year and count will show no. of regions
  
     fig = px.line(nations_over_time, x="Region", y="count")
     
@@ -115,12 +115,14 @@ if user_menu == 'Overall Analysis':
     st.title("Events over the years")
     
     events_over_time = helper.data_over_time(df, 'Event')
-    st.dataframe(events_over_time)
-    fig = px.line(events_over_time, x="Edition", y="Event")
+    events_over_time = events_over_time.sort_values('Event')  #here event is for year
+    #st.dataframe(events_over_time)
+    fig = px.line(events_over_time, x="Event", y="count")
     st.plotly_chart(fig)
 
 #--------------------------Line Chart-> No. of Athletes Over the Years--------------------------------------------------
     athlete_over_time = helper.athletes_over_time(df)
+    
     fig = px.line(athlete_over_time, x="Edition", y="Participating Athletes")
     st.title("Number of athletes over the years")
     st.plotly_chart(fig)
