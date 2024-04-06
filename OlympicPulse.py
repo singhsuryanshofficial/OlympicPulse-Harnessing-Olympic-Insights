@@ -100,7 +100,7 @@ if user_menu == 'Overall Analysis':
 
 #--------------------------Line Chart-> Participating Nations Over Time-------------------------------------------------
     nations_over_time = helper.data_over_time(df, 'Region')
-    fig = px.line(nations_over_time, x="Edition", y="Region")
+    fig = px.line(nations_over_time, x="count", y="Region")
     st.title("Participating nations over the years")
     st.plotly_chart(fig)
 
