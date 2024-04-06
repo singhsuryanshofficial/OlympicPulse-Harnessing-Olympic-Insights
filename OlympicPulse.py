@@ -103,8 +103,8 @@ if user_menu == 'Overall Analysis':
     st.dataframe(df)
 
     st.title("Participating nations over the years")
-    st.dataframe(nations_over_time)
     nations_over_time = helper.data_over_time(df, 'Region')
+    st.dataframe(nations_over_time)
     
     nations_over_time = nations_over_time.sort_values('Region')  
  
