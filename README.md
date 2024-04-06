@@ -62,4 +62,5 @@ Athlete-wise Analysis: Investigate age distribution, height vs. weight, and part
 Suryansh Singh
 
 # License
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License](LICENSE).
+
