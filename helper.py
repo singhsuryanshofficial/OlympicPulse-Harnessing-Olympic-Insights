@@ -97,7 +97,7 @@ def most_successful(df, sport):
         temp_df = temp_df[temp_df['Sport'] == sport]  # removed all other rows (except input sport)
 
     x = temp_df['Name'].value_counts().reset_index().head(15).merge(df, left_on='index', right_on='Name', how='left')[
-        ['index', 'Name_x', 'Sport', 'Region']].drop_duplicates('index')
+        ['index', 'Name_x', 'Sport', 'Region']].drop_duplicates()
     x.rename(columns={'index': 'Name', 'Name_x': 'Medals'}, inplace=True)
     return x
 
