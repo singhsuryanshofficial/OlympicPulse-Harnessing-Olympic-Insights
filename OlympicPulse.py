@@ -292,9 +292,8 @@ if user_menu == 'Athlete-wise Analysis':
 
     
     #--------------------Silver medalists--------------------------------------------------
-    st.title('Distribution of Age w.r.t. Sports (Silver Medalists)')
-
-    # Filter data for gold medalists
+    st.title('Distribution of Age w.r.t. Sports(Gold Medalists)')
+    # Filter data for silver medalists
     silver_medalists = df[df['Medal'] == 'Silver']
     
     # Group by Sport and Age, then count the occurrences
@@ -309,21 +308,16 @@ if user_menu == 'Athlete-wise Analysis':
         age_distribution = sport_data.set_index('Age')['Count'] / total_count
         sport_age_distributions[sport] = age_distribution
     
-    # Create a line plot using Matplotlib's pyplot
-    plt.figure(figsize=(11, 7))
+    # Create Plotly figure for probability distribution of silver medalists
+    fig = go.Figure()
     for sport, age_distribution in sport_age_distributions.items():
-        plt.plot(age_distribution.index, age_distribution.values, label=sport)
+        fig.add_trace(go.Scatter(x=age_distribution.index, y=age_distribution.values, mode='lines', name=sport))
     
-    # Set plot title and labels
-    plt.xlabel('Age')
-    plt.ylabel('Probability')
+    # Update layout
+    fig.update_layout(autosize=False, width=1100, height=700)
     
-    # Add legend
-    plt.legend()
-    
-    # Show plot
-    st.pyplot(plt)
-
+    # Streamlit display
+    st.plotly_chart(fig)
 
 
 
