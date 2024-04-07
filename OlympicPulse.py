@@ -246,17 +246,17 @@ if user_menu == 'Athlete-wise Analysis':
     bronze_age_pdf, _ = np.histogram(df[df['Medal'] == 'Bronze']['Age'], bins=overall_age_bins, density=True)
     fig = go.Figure()
 
-# Add traces for overall age distribution and medal-specific age distributions
-fig.add_trace(go.Scatter(x=overall_age_bins[:-1], y=overall_age_pdf, mode='lines', name='Overall Age Distribution'))
-fig.add_trace(go.Scatter(x=overall_age_bins[:-1], y=gold_age_pdf, mode='lines', name='Gold Medalists Age Distribution'))
-fig.add_trace(go.Scatter(x=overall_age_bins[:-1], y=silver_age_pdf, mode='lines', name='Silver Medalists Age Distribution'))
-fig.add_trace(go.Scatter(x=overall_age_bins[:-1], y=bronze_age_pdf, mode='lines', name='Bronze Medalists Age Distribution'))
+    # Add traces for overall age distribution and medal-specific age distributions
+    fig.add_trace(go.Scatter(x=overall_age_bins[:-1], y=overall_age_pdf, mode='lines', name='Overall Age Distribution'))
+    fig.add_trace(go.Scatter(x=overall_age_bins[:-1], y=gold_age_pdf, mode='lines', name='Gold Medalists Age Distribution'))
+    fig.add_trace(go.Scatter(x=overall_age_bins[:-1], y=silver_age_pdf, mode='lines', name='Silver Medalists Age Distribution'))
+    fig.add_trace(go.Scatter(x=overall_age_bins[:-1], y=bronze_age_pdf, mode='lines', name='Bronze Medalists Age Distribution'))
 
-# Update layout
-fig.update_layout(title='Age Distribution PDFs',xaxis_title='Age',yaxis_title='Probability Density')
-
-# Show figure
-fig.show()
+    # Update layout
+    fig.update_layout(title='Age Distribution PDFs',xaxis_title='Age',yaxis_title='Probability Density')
+    
+    # Show figure
+    fig.show()
 
 
 
