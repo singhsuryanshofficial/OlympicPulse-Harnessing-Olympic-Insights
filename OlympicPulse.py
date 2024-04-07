@@ -289,11 +289,24 @@ if user_menu == 'Athlete-wise Analysis':
     # Group by Sport and Age, then count the occurrences
     sport_age_counts = gold_medalists.groupby(['Sport', 'Age']).size().reset_index(name='Count')
     
-    # Plot distribution of age w.r.t. sports for gold medalists
-    fig = px.bar(sport_age_counts, x='Sport', y='Count', color='Age', title='Distribution of Age w.r.t. Sports (Gold Medalists)',
-                 labels={'Sport': 'Sport', 'Count': 'Number of Gold Medalists', 'Age': 'Age'},
-                 hover_name='Age', hover_data={'Count': True, 'Sport': False})
-    fig.update_layout(autosize=False, width=1100, height=800)
+    # Calculate probability distribution for each sport
+    sports = sport_age_counts['Sport'].unique()
+    sport_age_distributions = {}
+    for sport in sports:
+        sport_data = sport_age_counts[sport_age_counts['Sport'] == sport]
+        total_count = sport_data['Count'].sum()
+        age_distribution = sport_data.set_index('Age')['Count'] / total_count
+        sport_age_distributions[sport] = age_distribution
+    
+    # Create Plotly figure for probability distribution
+    fig = go.Figure()
+    for sport, age_distribution in sport_age_distributions.items():
+        fig.add_trace(go.Scatter(x=age_distribution.index, y=age_distribution.values, mode='lines', name=sport))
+    
+    # Update layout
+    fig.update_layout(title='Probability Distribution of Age w.r.t. Sports (Gold Medalists)',
+                      xaxis_title='Age', yaxis_title='Probability')
+    
     # Streamlit display
     st.plotly_chart(fig)
 
