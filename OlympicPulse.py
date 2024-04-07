@@ -140,24 +140,24 @@ if user_menu == 'Overall Analysis':
 
 #--------------------------Table: Most successful atheles in particular sport-------------------------------------------
 
-st.title("Most successful athletes")
-# Sidebar for sport selection
-sports_list = list(df['Sport'].unique())
-sports_list.insert(0, 'Overall')  # Add overall option
-selected_sport = st.selectbox('Select a sport:', sports_list)
-
-# Display top athletes
-if selected_sport:
-    st.subheader(f'Top 15 Athletes in ' + selected_sport)
-    top_athletes_df =  helper.get_top_athletes(selected_sport, df)
-    st.table(top_athletes_df[['Name', 'Gold', 'Silver', 'Bronze', 'Total Medals']])
-else:
-    st.write('Please select a sport from the sidebar.')
-
-
-#--------------overall data of athletes in summer olympics--------------------
-st.title('Overall Athlete Data - Summer Olympics')
-st.dataframe(df)
+    st.title("Most successful athletes")
+    # Sidebar for sport selection
+    sports_list = list(df['Sport'].unique())
+    sports_list.insert(0, 'Overall')  # Add overall option
+    selected_sport = st.selectbox('Select a sport:', sports_list)
+    
+    # Display top athletes
+    if selected_sport:
+        st.subheader(f'Top 15 Athletes in ' + selected_sport)
+        top_athletes_df =  helper.get_top_athletes(selected_sport, df)
+        st.table(top_athletes_df[['Name', 'Gold', 'Silver', 'Bronze', 'Total Medals']])
+    else:
+        st.write('Please select a sport from the sidebar.')
+    
+    
+    #--------------overall data of athletes in summer olympics--------------------
+    st.title('Overall Athlete Data - Summer Olympics')
+    st.dataframe(df)
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #--------------------------------------------Country-wise Analysis Section---------------------------------------------------------------------------
