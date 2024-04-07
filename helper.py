@@ -127,14 +127,13 @@ def country_event_heatmap(df, country):
     pt= new_df.pivot_table(index='Sport', columns='Year', values='Medal', aggfunc='count').fillna(0)
     return pt
 
-#--------------------------Function: Top 10 atheletes of the country based on sports------------------------------------
-def most_successful_countrywise(df, country):
-    temp_df = df.dropna(subset=['Medal']) # eliminate nan values
-    temp_df = temp_df[temp_df['Region'] == country]  # removed all other rows (except input region)
-    x = temp_df['Name'].value_counts().reset_index().head(10).merge(df, left_on='index', right_on='Name', how='left')[
-        ['index', 'Name_x', 'Sport']].drop_duplicates('index')
-    x.rename(columns={'index': 'Name', 'Name_x': 'Medals'}, inplace=True)
-    return x
+#--------------------------Function: Top 10 atheletes of the selected country country ------------------------------------
+def top_athletes_countrywise(selected_country, df):
+    filtered_df = df[df['Noc'] == selected_country]
+    top_athletes = filtered_df.groupby('Name').agg({'Gold': 'sum', 'Silver': 'sum', 'Bronze': 'sum'}).reset_index()
+    top_athletes['Total Medals'] = top_athletes['Gold'] + top_athletes['Silver'] + top_athletes['Bronze']
+    top_athletes = top_athletes.sort_values(by='Total Medals', ascending=False).head(10)
+    return top_athletes
 
 
 
