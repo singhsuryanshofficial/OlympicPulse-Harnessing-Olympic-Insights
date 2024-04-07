@@ -258,10 +258,7 @@ if user_menu == 'Athlete-wise Analysis':
     x4 = athlete_df[athlete_df['Medal'] == 'Bronze']['Age'].dropna()
     
     # Create a figure using Plotly
-    fig = ff.create_distplot([x1, x2, x3, x4], 
-                             ['Overall Age', 'Gold Medalists', 'Silver Medalists', 'Bronze Medalists'], 
-                             show_hist=False, 
-                             show_rug=False)
+    fig = ff.create_distplot([x1, x2, x3, x4], ['Overall Age', 'Gold Medalists', 'Silver Medalists', 'Bronze Medalists'], show_hist=False, show_rug=False)
     
     # Update layout to adjust the size of the plot
     fig.update_layout(autosize=False, width=1100, height=800)
