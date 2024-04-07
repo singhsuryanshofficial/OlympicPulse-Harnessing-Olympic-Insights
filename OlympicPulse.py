@@ -147,8 +147,8 @@ if user_menu == 'Overall Analysis':
  
     selected_sport= st.selectbox("Select a Sport", sport_list)
     x= helper.most_successful(df, selected_sport)
-    st.dataframe(x)
-    #st.table(x)
+    #st.dataframe(x)
+    st.table(x)
 
     #st.title("Overall Athlete Data")
     #st.dataframe(df)
