@@ -91,24 +91,30 @@ def athletes_over_time(df):
 #--------------------------Function: Most successful atheles in particular sport----------------------------------------
 
 
-def most_successful(df, sport):
-    temp_df = df.dropna(subset=['Medal']) # eliminate nan values of medal
-    if sport != 'Overall':
-        temp_df = temp_df[temp_df['Sport'] == sport]  # removed all other rows (except input sport)
+# def most_successful(df, sport):
+#     temp_df = df.dropna(subset=['Medal']) # eliminate nan values of medal
+#     if sport != 'Overall':
+#         temp_df = temp_df[temp_df['Sport'] == sport]  # removed all other rows (except input sport)
         
-    #x = temp_df['Name'].value_counts().reset_index().head(15).merge(df, left_on='index', right_on='Name', how='left')[['index', 'Name_x', 'Sport', 'Region']].drop_duplicates('index')
+#     #x = temp_df['Name'].value_counts().reset_index().head(15).merge(df, left_on='index', right_on='Name', how='left')[['index', 'Name_x', 'Sport', 'Region']].drop_duplicates('index')
+#     #x.rename(columns={'index': 'Name', 'Name_x': 'Medals'}, inplace=True)
+#     return temp_df
 
-    #x = temp_df['Name'].value_counts().reset_index().head(15).merge(df, left_index=True, right_on='Name', how='left')[['index', 'Name_x', 'Sport', 'Region']].drop_duplicates('index')
-
-    x = temp_df['Name'].value_counts().reset_index().head(15).merge(df, left_index=True, right_on='Name', how='left')
+def most_successful(df, sport):
+    temp_df = df.dropna(subset=['Medal']) # Drop rows where 'Medal' is NaN
+    if sport != 'Overall':
+        temp_df = temp_df[temp_df['Sport'] == sport]  # Filter by sport if specified
+        
+    # Count the number of medals for each athlete, select the top 15, and merge with the original DataFrame
+    x = temp_df['Name'].value_counts().reset_index().head(15).merge(df, left_on='index', right_on='Name', how='left')
+    
+    # Select desired columns and drop duplicates based on athlete's name
+    x = x[['index', 'Name_x', 'Sport', 'Region']].drop_duplicates('index')
+    
+    # Rename columns for clarity
     x.rename(columns={'index': 'Name', 'Name_x': 'Medals'}, inplace=True)
-
-
-
-    #x.rename(columns={'index': 'Name', 'Name_x': 'Medals'}, inplace=True)
-    return temp_df
-
-
+    
+    return x
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------COUNTRY WISE ANALYSIS SECTION FUNCTIONS--------------------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
