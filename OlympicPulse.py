@@ -244,7 +244,7 @@ if user_menu == 'Athlete-wise Analysis':
     st.title('Distribution of Age')
     
     # Drop duplicates based on 'Name' and 'Team' to get unique athletes
-    athlete_df = df.drop_duplicates(subset=['Name', 'Team'])
+    athlete_df = df.drop_duplicates(subset=['Name', 'Region'])
     st.dataframe(athlete_df)
     # PDF for overall age distribution
     x1 = athlete_df['Age'].dropna()
