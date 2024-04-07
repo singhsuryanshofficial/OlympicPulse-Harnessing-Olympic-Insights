@@ -270,17 +270,31 @@ if user_menu == 'Athlete-wise Analysis':
     #Gold medalists-------------------------------------------------
     st.title('Distribution of Age w.r.t. Sports(Gold Medalists)')
     
-    x1 = []
-    name1 = []
-    for sport in famous_sports:
-        temp_df = athlete_df[athlete_df['Sport'] == sport]
-        gold_medalists_age = temp_df[temp_df['Medal'] == 'Gold']['Age'].dropna()
-        if not gold_medalists_age.empty:
-            x1.append(gold_medalists_age)
-            name1.append(sport)
+    # x1 = []
+    # name1 = []
+    # for sport in famous_sports:
+    #     temp_df = athlete_df[athlete_df['Sport'] == sport]
+    #     gold_medalists_age = temp_df[temp_df['Medal'] == 'Gold']['Age'].dropna()
+    #     if not gold_medalists_age.empty:
+    #         x1.append(gold_medalists_age)
+    #         name1.append(sport)
 
-    fig = ff.create_distplot(x1, name1, show_hist=False, show_rug=False)
-    fig.update_layout(autosize=False, width=1100, height=800)  # code to make width and height of graph bigger
+    # fig = ff.create_distplot(x1, name1, show_hist=False, show_rug=False)
+    # fig.update_layout(autosize=False, width=1100, height=800)  # code to make width and height of graph bigger
+    # st.plotly_chart(fig)
+
+    # Filter data for gold medalists
+    gold_medalists = df[df['Medal'] == 'Gold']
+    
+    # Group by Sport and Age, then count the occurrences
+    sport_age_counts = gold_medalists.groupby(['Sport', 'Age']).size().reset_index(name='Count')
+    
+    # Plot distribution of age w.r.t. sports for gold medalists
+    fig = px.bar(sport_age_counts, x='Sport', y='Count', color='Age', title='Distribution of Age w.r.t. Sports (Gold Medalists)',
+                 labels={'Sport': 'Sport', 'Count': 'Number of Gold Medalists', 'Age': 'Age'},
+                 hover_name='Age', hover_data={'Count': True, 'Sport': False})
+    fig.update_layout(autosize=False, width=1100, height=800)
+    # Streamlit display
     st.plotly_chart(fig)
 
     #Silver medalists--------------------------------------------------
