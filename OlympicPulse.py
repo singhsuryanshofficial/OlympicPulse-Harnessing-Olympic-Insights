@@ -284,9 +284,9 @@ if user_menu == 'Athlete-wise Analysis':
         total_count = sport_data['Count'].sum()
         age_distribution = sport_data.set_index('Age')['Count'] / total_count
         sport_age_distributions[sport] = age_distribution
-    
+        
     # Create Plotly figure for probability distribution
-    fig = go.Figure()
+    fig = go.Figure(show_hist=False, show_rug=False)
     for sport, age_distribution in sport_age_distributions.items():
         fig.add_trace(go.Scatter(x=age_distribution.index, y=age_distribution.values, mode='lines', name=sport))
     
