@@ -242,13 +242,13 @@ if user_menu == 'Athlete-wise Analysis':
     # Create Plotly figure with all distributions
     fig = go.Figure()
     
-    fig.add_trace(go.Scatter(x=overall_age_dist.index, y=overall_age_dist.values, mode='lines', name='Overall Age Distribution'))
+    fig.add_trace(go.Scatter(x=overall_age_dist.index, y=overall_age_dist.values, mode='mone', name='Overall Age Distribution'))
     fig.add_trace(go.Scatter(x=gold_age_dist.index, y=gold_age_dist.values, mode='lines', name='Gold Medalists Age Distribution'))
     fig.add_trace(go.Scatter(x=silver_age_dist.index, y=silver_age_dist.values, mode='lines', name='Silver Medalists Age Distribution'))
     fig.add_trace(go.Scatter(x=bronze_age_dist.index, y=bronze_age_dist.values, mode='lines', name='Bronze Medalists Age Distribution'))
 
     # Update layout
-    fig.update_layout(autosize=False, width=1100, height=800, show_hist = False, show_rug= False)
+    fig.update_layout(autosize=False, width=1100, height=800)
 
     # Streamlit display
     st.plotly_chart(fig)
