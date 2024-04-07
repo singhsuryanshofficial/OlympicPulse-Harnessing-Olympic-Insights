@@ -146,12 +146,25 @@ if user_menu == 'Overall Analysis':
     sport_list.insert(0, 'Overall')
  
     selected_sport= st.selectbox("Select a Sport", sport_list)
-    x= helper.most_successful(df, selected_sport)
+
+    temp_df = df.dropna(subset=['Medal'])
+    if sport != 'Overall':
+            temp_df = temp_df[temp_df['Sport'] == sport]
+    st.dataframe(temp_df)
+    #x= most_successful(df, 'Overall')
     #st.dataframe(x)
-    st.table(x)
+    #st.table(x)
 
     #st.title("Overall Athlete Data")
     #st.dataframe(df)
+
+    # def most_successful(df, sport):
+    #      # eliminate nan values of medal
+    #       # removed all other rows (except input sport)
+    
+    #     x = temp_df['Name'].value_counts().reset_index().head(15).merge(df, left_on='index', right_on='Name', how='left')[['index', 'Name_x', 'Sport', 'Region']].drop_duplicates('index')
+    #     x.rename(columns={'index': 'Name', 'Name_x': 'Medals'}, inplace=True)
+    #     return x
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #--------------------------------------------Country-wise Analysis Section---------------------------------------------------------------------------
