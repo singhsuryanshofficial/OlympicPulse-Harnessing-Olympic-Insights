@@ -141,18 +141,18 @@ if user_menu == 'Overall Analysis':
 #--------------------------Table: Most successful atheles in particular sport-------------------------------------------
 
 st.title("Most successful athletes")
-
 # Sidebar for sport selection
-selected_sport = st.selectbox('Select a sport:', df['Sport'].unique())
+sports_list = list(df['Sport'].unique())
+sports_list.insert(0, 'Overall')  # Add overall option
+selected_sport = st.sidebar.selectbox('Select a sport:', sports_list)
 
 # Display top athletes
 if selected_sport:
-    
-    top_athletes_df = helper.get_top_athletes(selected_sport, df)
+    st.subheader(f'Top 15 Athletes in ' + selected_sport)
+    top_athletes_df =  helper.get_top_athletes(selected_sport, df)
     st.table(top_athletes_df[['Name', 'Gold', 'Silver', 'Bronze', 'Total Medals']])
 else:
     st.write('Please select a sport from the sidebar.')
-
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #--------------------------------------------Country-wise Analysis Section---------------------------------------------------------------------------
