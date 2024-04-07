@@ -240,34 +240,34 @@ if user_menu == 'Athlete-wise Analysis':
 
 # Assuming df is your dataframe containing the dataset
 
-st.title('Distribution of Age')
-
-# Drop duplicates based on 'Name' and 'Region' to get unique athletes
-athlete_df = df.drop_duplicates(subset=['Name', 'Team'])
-
-# PDF for overall age distribution
-x1 = athlete_df['Age'].dropna()
-
-# PDF for age distribution of gold medalists
-x2 = athlete_df[athlete_df['Medal'] == 'Gold']['Age'].dropna()
-
-# PDF for age distribution of silver medalists
-x3 = athlete_df[athlete_df['Medal'] == 'Silver']['Age'].dropna()
-
-# PDF for age distribution of bronze medalists
-x4 = athlete_df[athlete_df['Medal'] == 'Bronze']['Age'].dropna()
-
-# Create a figure using Plotly
-fig = ff.create_distplot([x1, x2, x3, x4], 
-                         ['Overall Age', 'Gold Medalists', 'Silver Medalists', 'Bronze Medalists'], 
-                         show_hist=False, 
-                         show_rug=False)
-
-# Update layout to adjust the size of the plot
-fig.update_layout(autosize=False, width=1100, height=800)
-
-# Display the plot using Streamlit
-st.plotly_chart(fig)
+    st.title('Distribution of Age')
+    
+    # Drop duplicates based on 'Name' and 'Region' to get unique athletes
+    athlete_df = df.drop_duplicates(subset=['Name', 'Team'])
+    
+    # PDF for overall age distribution
+    x1 = athlete_df['Age'].dropna()
+    
+    # PDF for age distribution of gold medalists
+    x2 = athlete_df[athlete_df['Medal'] == 'Gold']['Age'].dropna()
+    
+    # PDF for age distribution of silver medalists
+    x3 = athlete_df[athlete_df['Medal'] == 'Silver']['Age'].dropna()
+    
+    # PDF for age distribution of bronze medalists
+    x4 = athlete_df[athlete_df['Medal'] == 'Bronze']['Age'].dropna()
+    
+    # Create a figure using Plotly
+    fig = ff.create_distplot([x1, x2, x3, x4], 
+                             ['Overall Age', 'Gold Medalists', 'Silver Medalists', 'Bronze Medalists'], 
+                             show_hist=False, 
+                             show_rug=False)
+    
+    # Update layout to adjust the size of the plot
+    fig.update_layout(autosize=False, width=1100, height=800)
+    
+    # Display the plot using Streamlit
+    st.plotly_chart(fig)
 
 
 #---------------- GRAPH Plot: Age distribution with resepct to every sport-----------------------------------------------------
