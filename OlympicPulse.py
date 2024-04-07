@@ -148,7 +148,7 @@ selected_sport = st.selectbox('Select a sport:', df['Sport'].unique())
 # Display top athletes
 if selected_sport:
     
-    top_athletes_df = get_top_athletes(selected_sport, df)
+    top_athletes_df = helper.get_top_athletes(selected_sport, df)
     st.table(top_athletes_df[['Name', 'Gold', 'Silver', 'Bronze', 'Total Medals']])
 else:
     st.write('Please select a sport from the sidebar.')
