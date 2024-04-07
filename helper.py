@@ -95,10 +95,9 @@ def most_successful(df, sport):
     temp_df = df.dropna(subset=['Medal']) # eliminate nan values of medal
     if sport != 'Overall':
         temp_df = temp_df[temp_df['Sport'] == sport]  # removed all other rows (except input sport)
-    x = temp_df['Name'].value_counts().reset_index().head(15).merge(df, left_on='Name', right_on='Name', how='left')[
-        ['Name_x', 'Sport', 'Region']]
-    x.rename(columns={'index': 'Name', 'Name_x': 'Medals'}, inplace=True)
-    return x
+    #x = temp_df['Name'].value_counts().reset_index().head(15).merge(df, left_on='Name', right_on='Name', how='left')[['Name_x', 'Sport', 'Region']]
+    #x.rename(columns={'index': 'Name', 'Name_x': 'Medals'}, inplace=True)
+    return temp_df
 
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
