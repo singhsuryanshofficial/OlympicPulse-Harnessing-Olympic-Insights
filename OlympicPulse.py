@@ -242,7 +242,7 @@ if user_menu == 'Athlete-wise Analysis':
     # Create Plotly figure with all distributions
     fig = go.Figure()
     
-    fig.add_trace(go.Scatter(x=overall_age_dist.index, y=overall_age_dist.values, mode='none', name='Overall Age Distribution'))
+    fig.add_trace(go.Scatter(x=overall_age_dist.index, y=overall_age_dist.values, mode='lines', name='Overall Age Distribution'))
     fig.add_trace(go.Scatter(x=gold_age_dist.index, y=gold_age_dist.values, mode='lines', name='Gold Medalists Age Distribution'))
     fig.add_trace(go.Scatter(x=silver_age_dist.index, y=silver_age_dist.values, mode='lines', name='Silver Medalists Age Distribution'))
     fig.add_trace(go.Scatter(x=bronze_age_dist.index, y=bronze_age_dist.values, mode='lines', name='Bronze Medalists Age Distribution'))
@@ -268,6 +268,8 @@ if user_menu == 'Athlete-wise Analysis':
 #MORE FLAT CURVE MEANS-> THAT SPORT CAN BE PLAYED AT ANY AGE...for example ART COMPETITIONS
 
     #Gold medalists-------------------------------------------------
+    st.title('Distribution of Age w.r.t. Sports(Gold Medalists)')
+    
     x1 = []
     name1 = []
     for sport in famous_sports:
@@ -279,7 +281,6 @@ if user_menu == 'Athlete-wise Analysis':
 
     fig = ff.create_distplot(x1, name1, show_hist=False, show_rug=False)
     fig.update_layout(autosize=False, width=1100, height=800)  # code to make width and height of graph bigger
-    st.title('Distribution of Age w.r.t. Sports(Gold Medalists)')
     st.plotly_chart(fig)
 
     #Silver medalists--------------------------------------------------
