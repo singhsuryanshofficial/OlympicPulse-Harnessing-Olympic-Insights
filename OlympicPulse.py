@@ -292,8 +292,8 @@ if user_menu == 'Athlete-wise Analysis':
     
     # Update layout with specified y-axis tickvals
     fig.update_layout(title='Probability Distribution of Age w.r.t. Sports (Gold Medalists)',
-                      xaxis_title='Age', yaxis_title='Probability',
-                      yaxis=dict(tickvals=[0, 0.025, 0.050, 0.075, 0.100, 0.125 ,0.150, 0.175, 0.2]), autosize=False, width=1100, height=800)
+                  xaxis_title='Age', yaxis_title='Probability',
+                  yaxis=dict(scaleanchor="x", scaleratio=1, autorange=True))
     # Streamlit display
     st.plotly_chart(fig)
 
