@@ -213,11 +213,13 @@ def top_athletes_countrywise(selected_country, df):
 st.title('Top 10 Athletes of ' + selected_country)
 
 # Sidebar for country selection
-selected_country = st.sidebar.selectbox('Select a country:', df['Noc'].unique())
+country_list = df['Region'].dropna().unique().tolist()   #dropna() used because we have nan values for Region also
+country_list.sort()
+
+selected_country= st.sidebar.selectbox('Select the country ', country_list)
 
 # Display top athletes
 if selected_country:
-    st.subheader(f'Top 10 Athletes from {selected_country}')
     top_athletes_df = top_athletes_countrywise(selected_country, df)
     st.table(top_athletes_df[['Name', 'Gold', 'Silver', 'Bronze', 'Total Medals']])
 else:
