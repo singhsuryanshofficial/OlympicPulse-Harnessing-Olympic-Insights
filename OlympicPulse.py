@@ -10,8 +10,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.figure_factory as ff
 
-import numpy as np
-import plotly.graph_objects as go
+
 
 df = pd.read_csv('athlete_events.csv')
 region_df = pd.read_csv('noc_regions.csv')
@@ -240,23 +239,6 @@ if user_menu == 'Athlete-wise Analysis':
 #     fig.update_layout(autosize = False, width= 1100, height = 800)  #code to make width and height of graph bigger
   
 #     st.plotly_chart(fig)
-    
-    gold_age_pdf, _ = np.histogram(df[df['Medal'] == 'Gold']['Age']
-    silver_age_pdf, _ = np.histogram(df[df['Medal'] == 'Silver']['Age']
-    bronze_age_pdf, _ = np.histogram(df[df['Medal'] == 'Bronze']['Age']
-    fig = go.Figure()
-
-    # Add traces for overall age distribution and medal-specific age distributions
-    fig.add_trace(go.Scatter(x=overall_age_bins[:-1], y=overall_age_pdf, mode='lines', name='Overall Age Distribution'))
-    fig.add_trace(go.Scatter(x=overall_age_bins[:-1], y=gold_age_pdf, mode='lines', name='Gold Medalists Age Distribution'))
-    fig.add_trace(go.Scatter(x=overall_age_bins[:-1], y=silver_age_pdf, mode='lines', name='Silver Medalists Age Distribution'))
-    fig.add_trace(go.Scatter(x=overall_age_bins[:-1], y=bronze_age_pdf, mode='lines', name='Bronze Medalists Age Distribution'))
-
-    # Update layout
-    fig.update_layout(title='Age Distribution PDFs',xaxis_title='Age',yaxis_title='Probability Density')
-    
-    # Show figure
-    fig.show()
 
 
 
