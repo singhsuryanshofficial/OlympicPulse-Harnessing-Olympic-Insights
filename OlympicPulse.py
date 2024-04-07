@@ -9,7 +9,7 @@ import plotly.express as px
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.figure_factory as ff
-
+import plotly.graph_objs as go
 
 
 df = pd.read_csv('athlete_events.csv')
@@ -222,20 +222,55 @@ if user_menu == 'Athlete-wise Analysis':
       
 #----------------PDF(probability Distrubtion of athletes' age who have participate in Olympic)--------------------------
     
-    #PDF(probability Distrubtion  of age
-    x1= athlete_df['Age'].dropna()
-    #PDF for age distribution of gold medalists
-    x2 = athlete_df[athlete_df['Medal'] == 'Gold']['Age'].dropna()
-    #PDF for age distribution of silver medalists
-    x3 = athlete_df[athlete_df['Medal'] == 'Silver']['Age'].dropna()
-    #PDF for age distribution of bronze medalists
-    x4 = athlete_df[athlete_df['Medal'] == 'Bronze']['Age'].dropna()
+    # #PDF(probability Distrubtion  of age
+    # x1= athlete_df['Age'].dropna()
+    # #PDF for age distribution of gold medalists
+    # x2 = athlete_df[athlete_df['Medal'] == 'Gold']['Age'].dropna()
+    # #PDF for age distribution of silver medalists
+    # x3 = athlete_df[athlete_df['Medal'] == 'Silver']['Age'].dropna()
+    # #PDF for age distribution of bronze medalists
+    # x4 = athlete_df[athlete_df['Medal'] == 'Bronze']['Age'].dropna()
 
-    fig = ff.create_distplot([x1,x2,x3,x4], ['Overall Age', 'Gold Medalish', 'Silver Medalist', 'Bronze Medalist'], show_hist= False, show_rug= False)
+    # fig = ff.create_distplot([x1,x2,x3,x4], ['Overall Age', 'Gold Medalish', 'Silver Medalist', 'Bronze Medalist'], show_hist= False, show_rug= False)
 
-    fig.update_layout(autosize = False, width= 1100, height = 800)  #code to make width and height of graph bigger
+    # fig.update_layout(autosize = False, width= 1100, height = 800)  #code to make width and height of graph bigger
   
-    st.plotly_chart(fig)
+    # st.plotly_chart(fig)
+    
+     
+    
+    # Load the dataset
+    
+    # Extract age information
+    ages = df['Age'].dropna()
+    
+    # Calculate overall age distribution
+    overall_age_dist = ages.value_counts(normalize=True).sort_index()
+    
+    # Calculate age distribution for gold medalists
+    gold_ages = df[df['Medal'] == 'Gold']['Age'].dropna()
+    gold_age_dist = gold_ages.value_counts(normalize=True).sort_index()
+    
+    # Calculate age distribution for silver medalists
+    silver_ages = df[df['Medal'] == 'Silver']['Age'].dropna()
+    silver_age_dist = silver_ages.value_counts(normalize=True).sort_index()
+    
+    # Calculate age distribution for bronze medalists
+    bronze_ages = df[df['Medal'] == 'Bronze']['Age'].dropna()
+    bronze_age_dist = bronze_ages.value_counts(normalize=True).sort_index()
+    
+    # Create Plotly figures
+    fig_overall = go.Figure(data=go.Scatter(x=overall_age_dist.index, y=overall_age_dist.values, mode='lines', name='Overall Age Distribution'))
+    fig_gold = go.Figure(data=go.Scatter(x=gold_age_dist.index, y=gold_age_dist.values, mode='lines', name='Gold Medalists Age Distribution'))
+    fig_silver = go.Figure(data=go.Scatter(x=silver_age_dist.index, y=silver_age_dist.values, mode='lines', name='Silver Medalists Age Distribution'))
+    fig_bronze = go.Figure(data=go.Scatter(x=bronze_age_dist.index, y=bronze_age_dist.values, mode='lines', name='Bronze Medalists Age Distribution'))
+    
+    # Streamlit display
+    st.plotly_chart(fig_overall)
+    st.plotly_chart(fig_gold)
+    st.plotly_chart(fig_silver)
+    st.plotly_chart(fig_bronze)
+
 
 
 #---------------- GRAPH Plot: Age distribution with resepct to every sport-----------------------------------------------------
