@@ -212,10 +212,11 @@ if user_menu == 'Country-wise Analysis':
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 
 if user_menu == 'Athlete-wise Analysis':
-
+      
 #----------------PDF(probability Distrubtion of athletes' age who have participate in Olympic)--------------------------
-
+    st.title('Distribution of Age')
     athlete_df = df.drop_duplicates(subset=['Name', 'Region'])
+    st.dataframe(athlete_df)
 
     #PDF(probability Distrubtion  of age
     x1= athlete_df['Age'].dropna()
@@ -229,7 +230,7 @@ if user_menu == 'Athlete-wise Analysis':
     fig = ff.create_distplot([x1,x2,x3,x4], ['Overall Age', 'Gold Medalish', 'Silver Medalist', 'Bronze Medalist'], show_hist= False, show_rug= False)
 
     fig.update_layout(autosize = False, width= 1100, height = 800)  #code to make width and height of graph bigger
-    st.title('Distribution of Age')
+  
     st.plotly_chart(fig)
 
 #---------------- GRAPH Plot: Age distribution with resepct to every sport-----------------------------------------------------
