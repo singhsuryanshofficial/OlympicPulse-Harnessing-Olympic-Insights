@@ -144,7 +144,7 @@ st.title("Most successful athletes")
 # Sidebar for sport selection
 sports_list = list(df['Sport'].unique())
 sports_list.insert(0, 'Overall')  # Add overall option
-selected_sport = st.sidebar.selectbox('Select a sport:', sports_list)
+selected_sport = st.selectbox('Select a sport:', sports_list)
 
 # Display top athletes
 if selected_sport:
@@ -153,6 +153,11 @@ if selected_sport:
     st.table(top_athletes_df[['Name', 'Gold', 'Silver', 'Bronze', 'Total Medals']])
 else:
     st.write('Please select a sport from the sidebar.')
+
+
+#--------------overall data of athletes in summer olympics--------------------
+st.title('Overall Athlete Data - Summer Olympics')
+st.datafram(df)
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #--------------------------------------------Country-wise Analysis Section---------------------------------------------------------------------------
