@@ -139,25 +139,15 @@ if user_menu == 'Overall Analysis':
     st.pyplot(fig)
 
 #--------------------------Table: Most successful atheles in particular sport-------------------------------------------
- 
-# Function to filter top athletes based on selected sport
-def get_top_athletes(selected_sport, df):
-    filtered_df = df[df['Sport'] == selected_sport]
-    top_athletes = filtered_df.groupby('Name').agg({'Gold': 'sum', 'Silver': 'sum', 'Bronze': 'sum'}).reset_index()
-    top_athletes['Total Medals'] = top_athletes['Gold'] + top_athletes['Silver'] + top_athletes['Bronze']
-    top_athletes = top_athletes.sort_values(by='Total Medals', ascending=False).head(15)
-    return top_athletes
 
+st.title("Most successful athletes")
 
 # Sidebar for sport selection
 selected_sport = st.selectbox('Select a sport:', df['Sport'].unique())
 
-st.title('Top 15 Athletes in ' + selected_sport)
-
-
 # Display top athletes
 if selected_sport:
-    st.subheader(f'Top 15 Athletes in {selected_sport}')
+    
     top_athletes_df = get_top_athletes(selected_sport, df)
     st.table(top_athletes_df[['Name', 'Gold', 'Silver', 'Bronze', 'Total Medals']])
 else:
