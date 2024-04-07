@@ -11,9 +11,9 @@ import seaborn as sns
 import plotly.figure_factory as ff
 import plotly.graph_objs as go
 
-
 df = pd.read_csv('athlete_events.csv')
 region_df = pd.read_csv('noc_regions.csv')
+
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 # -----------------------wide page view for default-------------------------------------------------------------------------------------------------
