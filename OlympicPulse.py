@@ -132,7 +132,7 @@ if user_menu == 'Overall Analysis':
     fig = px.line(athlete_over_time, x="Edition", y="Participating Athletes")
     st.plotly_chart(fig)
 #--------------------------HeatMap-> No. of Events of one sport---------------------------------------------------------
-    st.title("Number of events in all sports over time")
+    st.title("Number of events in all sports over the years")
     fig,ax=plt.subplots(figsize=(20,20))
     x = df.drop_duplicates(['Year', 'Sport', 'Event'])
     ax= sns.heatmap(x.pivot_table(index='Sport', columns='Year', values='Event', aggfunc='count').fillna(0).astype('int'),annot=True)
@@ -196,28 +196,15 @@ if user_menu == 'Country-wise Analysis':
 
 
 #--------------------Top 10 atheletes of country based on sports--------------------------------------------------------
-
-
-
-
-
-
-# Function to filter top athletes based on selected country
-def top_athletes_countrywise(selected_country, df):
-    filtered_df = df[df['Region'] == selected_country]
-    top_athletes = filtered_df.groupby('Name').agg({'Gold': 'sum', 'Silver': 'sum', 'Bronze': 'sum'}).reset_index()
-    top_athletes['Total Medals'] = top_athletes['Gold'] + top_athletes['Silver'] + top_athletes['Bronze']
-    top_athletes = top_athletes.sort_values(by='Total Medals', ascending=False).head(10)
-    return top_athletes
-
-st.title('Top 10 Athletes of ' + selected_country)
-
-# Display top athletes
-if selected_country:
-    top_athletes_df = top_athletes_countrywise(selected_country, df)
-    st.table(top_athletes_df[['Name', 'Gold', 'Silver', 'Bronze', 'Total Medals']])
-else:
-    st.write('Please select a country from the sidebar.')
+    
+    st.title('Top 10 Athletes of ' + selected_country)
+    
+    # Display top athletes
+    if selected_country:
+        top_athletes_df = helper.top_athletes_countrywise(selected_country, df)
+        st.table(top_athletes_df[['Name', 'Gold', 'Silver', 'Bronze', 'Total Medals']])
+    else:
+        st.write('Please select a country from the sidebar.')
 
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
