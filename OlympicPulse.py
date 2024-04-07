@@ -248,7 +248,7 @@ if user_menu == 'Athlete-wise Analysis':
     fig.add_trace(go.Scatter(x=bronze_age_dist.index, y=bronze_age_dist.values, mode='lines', name='Bronze Medalists Age Distribution'))
 
     # Update layout
-    fig.update_layout(autosize=False, width=1100, height=800)
+    fig.update_layout(autosize=False, width=1100, height=800, show_hist = False, show_rug= False)
 
     # Streamlit display
     st.plotly_chart(fig)
