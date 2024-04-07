@@ -290,7 +290,7 @@ if user_menu == 'Athlete-wise Analysis':
     for sport, age_distribution in sport_age_distributions.items():
         fig.add_trace(go.Scatter(x=age_distribution.index, y=age_distribution.values, mode='lines', name=sport))
     
-    fig.update_layout(autosize=False, width=1100, height=1200)
+    fig.update_layout(autosize=False, width=1100, height=700)
     st.plotly_chart(fig)
 
     
