@@ -207,7 +207,7 @@ st.title('Top 10 Athletes of ' + selected_country)
 # Display top athletes
 if selected_country:
     st.subheader(f'Top 10 Athletes from {selected_country}')
-    top_athletes_df = top_athletes_countrywise(selected_country, df)
+    top_athletes_df = helper.top_athletes_countrywise(selected_country, df)
     st.table(top_athletes_df[['Name', 'Gold', 'Silver', 'Bronze', 'Total Medals']])
 else:
     st.write('Please select a country from the sidebar.')
