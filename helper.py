@@ -89,16 +89,13 @@ def athletes_over_time(df):
 
 
 #--------------------------Function: Most successful atheles in particular sport----------------------------------------
-
-
-def most_successful(df, sport):
-    temp_df = df.dropna(subset=['Medal']) # eliminate nan values of medal
-    if sport != 'Overall':
-        temp_df = temp_df[temp_df['Sport'] == sport]  # removed all other rows (except input sport)
-
-    x = temp_df['Name'].value_counts().reset_index().head(15).merge(df, left_on='index', right_on='Name', how='left')[['index', 'Name_x', 'Sport', 'Region']].drop_duplicates('index')
-    x.rename(columns={'index': 'Name', 'Name_x': 'Medals'}, inplace=True)
-    return x
+# --------------Function to filter top athletes based on selected sport
+def get_top_athletes(selected_sport, df):
+    filtered_df = df[df['Sport'] == selected_sport]
+    top_athletes = filtered_df.groupby('Name').agg({'Gold': 'sum', 'Silver': 'sum', 'Bronze': 'sum'}).reset_index()
+    top_athletes['Total Medals'] = top_athletes['Gold'] + top_athletes['Silver'] + top_athletes['Bronze']
+    top_athletes = top_athletes.sort_values(by='Total Medals', ascending=False).head(15)
+    return top_athletes
 
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
