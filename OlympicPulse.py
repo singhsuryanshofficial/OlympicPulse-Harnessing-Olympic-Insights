@@ -204,19 +204,13 @@ if user_menu == 'Country-wise Analysis':
 
 # Function to filter top athletes based on selected country
 def top_athletes_countrywise(selected_country, df):
-    filtered_df = df[df['Noc'] == selected_country]
+    filtered_df = df[df['Region'] == selected_country]
     top_athletes = filtered_df.groupby('Name').agg({'Gold': 'sum', 'Silver': 'sum', 'Bronze': 'sum'}).reset_index()
     top_athletes['Total Medals'] = top_athletes['Gold'] + top_athletes['Silver'] + top_athletes['Bronze']
     top_athletes = top_athletes.sort_values(by='Total Medals', ascending=False).head(10)
     return top_athletes
 
 st.title('Top 10 Athletes of ' + selected_country)
-
-# Sidebar for country selection
-country_list = df['Region'].dropna().unique().tolist()   #dropna() used because we have nan values for Region also
-country_list.sort()
-
-selected_country= st.sidebar.selectbox('Select the country ', country_list)
 
 # Display top athletes
 if selected_country:
