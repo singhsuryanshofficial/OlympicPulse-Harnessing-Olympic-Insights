@@ -148,7 +148,7 @@ if user_menu == 'Overall Analysis':
     selected_sport= st.selectbox("Select a Sport", sport_list)
 
     temp_df = df.dropna(subset=['Medal'])
-    if sport != 'Overall':
+    if selected_sport != 'Overall':
             temp_df = temp_df[temp_df['Sport'] == selected_sport]
     st.dataframe(temp_df)
     #x= most_successful(df, 'Overall')
