@@ -240,10 +240,10 @@ if user_menu == 'Athlete-wise Analysis':
 #     fig.update_layout(autosize = False, width= 1100, height = 800)  #code to make width and height of graph bigger
   
 #     st.plotly_chart(fig)
-    overall_age_pdf, overall_age_bins = np.histogram(df['Age'], bins=30, density=True)
-    gold_age_pdf, _ = np.histogram(df[df['Medal'] == 'Gold']['Age'], bins=overall_age_bins, density=True)
-    silver_age_pdf, _ = np.histogram(df[df['Medal'] == 'Silver']['Age'], bins=overall_age_bins, density=True)
-    bronze_age_pdf, _ = np.histogram(df[df['Medal'] == 'Bronze']['Age'], bins=overall_age_bins, density=True)
+    
+    gold_age_pdf, _ = np.histogram(df[df['Medal'] == 'Gold']['Age']
+    silver_age_pdf, _ = np.histogram(df[df['Medal'] == 'Silver']['Age']
+    bronze_age_pdf, _ = np.histogram(df[df['Medal'] == 'Bronze']['Age']
     fig = go.Figure()
 
     # Add traces for overall age distribution and medal-specific age distributions
