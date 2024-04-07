@@ -196,9 +196,22 @@ if user_menu == 'Country-wise Analysis':
 
 
 #--------------------Top 10 atheletes of country based on sports--------------------------------------------------------
-    st.title(selected_country + "'s top 10 atheletes")
-    best10_df = helper.most_successful_countrywise(df, selected_country)
-    st.table(best10_df)
+
+# # Sidebar for country selection
+# selected_country = st.sidebar.selectbox('Select a country:', df['Noc'].unique())   #country code already mentioned above
+
+# Streamlit app
+st.title('Top 10 Athletes of ' + selected_country)
+
+
+# Display top athletes
+if selected_country:
+    st.subheader(f'Top 10 Athletes from {selected_country}')
+    top_athletes_df = top_athletes_countrywise(selected_country, df)
+    st.table(top_athletes_df[['Name', 'Gold', 'Silver', 'Bronze', 'Total Medals']])
+else:
+    st.write('Please select a country from the sidebar.')
+
 
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
