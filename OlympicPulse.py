@@ -10,6 +10,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.figure_factory as ff
 
+import numpy as np
+import plotly.graph_objects as go
+
 df = pd.read_csv('athlete_events.csv')
 region_df = pd.read_csv('noc_regions.csv')
 
@@ -212,6 +215,11 @@ if user_menu == 'Country-wise Analysis':
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 
 if user_menu == 'Athlete-wise Analysis':
+    st.title('Distribution of Age')
+    
+    # Drop duplicates based on 'Name' and 'Team' to get unique athletes
+    athlete_df = df.drop_duplicates(subset=['Name', 'Region'])
+    st.dataframe(athlete_df)
       
 #----------------PDF(probability Distrubtion of athletes' age who have participate in Olympic)--------------------------
 #     st.title('Distribution of Age')
@@ -232,40 +240,24 @@ if user_menu == 'Athlete-wise Analysis':
 #     fig.update_layout(autosize = False, width= 1100, height = 800)  #code to make width and height of graph bigger
   
 #     st.plotly_chart(fig)
+    overall_age_pdf, overall_age_bins = np.histogram(df['Age'], bins=30, density=True)
+    gold_age_pdf, _ = np.histogram(df[df['Medal'] == 'Gold']['Age'], bins=overall_age_bins, density=True)
+    silver_age_pdf, _ = np.histogram(df[df['Medal'] == 'Silver']['Age'], bins=overall_age_bins, density=True)
+    bronze_age_pdf, _ = np.histogram(df[df['Medal'] == 'Bronze']['Age'], bins=overall_age_bins, density=True)
+    fig = go.Figure()
 
+# Add traces for overall age distribution and medal-specific age distributions
+fig.add_trace(go.Scatter(x=overall_age_bins[:-1], y=overall_age_pdf, mode='lines', name='Overall Age Distribution'))
+fig.add_trace(go.Scatter(x=overall_age_bins[:-1], y=gold_age_pdf, mode='lines', name='Gold Medalists Age Distribution'))
+fig.add_trace(go.Scatter(x=overall_age_bins[:-1], y=silver_age_pdf, mode='lines', name='Silver Medalists Age Distribution'))
+fig.add_trace(go.Scatter(x=overall_age_bins[:-1], y=bronze_age_pdf, mode='lines', name='Bronze Medalists Age Distribution'))
 
-#     import streamlit as st
-# import pandas as pd
-# import plotly.figure_factory as ff
+# Update layout
+fig.update_layout(title='Age Distribution PDFs',xaxis_title='Age',yaxis_title='Probability Density')
 
-# Load the dataset
+# Show figure
+fig.show()
 
-
-    st.title('Distribution of Age')
-    
-    # Drop duplicates based on 'Name' and 'Team' to get unique athletes
-    athlete_df = df.drop_duplicates(subset=['Name', 'Region'])
-    st.dataframe(athlete_df)
-    # PDF for overall age distribution
-    x1 = athlete_df['Age'].dropna()
-    
-    # PDF for age distribution of gold medalists
-    x2 = athlete_df[athlete_df['Medal'] == 'Gold']['Age'].dropna()
-    
-    # PDF for age distribution of silver medalists
-    x3 = athlete_df[athlete_df['Medal'] == 'Silver']['Age'].dropna()
-    
-    # PDF for age distribution of bronze medalists
-    x4 = athlete_df[athlete_df['Medal'] == 'Bronze']['Age'].dropna()
-    
-    # Create a figure using Plotly
-    fig = ff.create_distplot([x1, x2, x3, x4], ['Overall Age', 'Gold Medalists', 'Silver Medalists', 'Bronze Medalists'], show_hist=False, show_rug=False)
-    
-    # Update layout to adjust the size of the plot
-    fig.update_layout(autosize=False, width=1100, height=800)
-    
-    # Display the plot using Streamlit
-    st.plotly_chart(fig)
 
 
 #---------------- GRAPH Plot: Age distribution with resepct to every sport-----------------------------------------------------
