@@ -99,9 +99,7 @@ if user_menu == 'Overall Analysis':
         st.title(athletes)
 
 #--------------------------Line Chart-> Participating Nations Over Time-------------------------------------------------
-    st.title("Overall Athlete Data")
-    st.dataframe(df)
-
+    
     st.title("Participating nations over the years")
     nations_over_time = helper.data_over_time(df, 'Region')
     st.dataframe(nations_over_time)
@@ -151,6 +149,9 @@ if user_menu == 'Overall Analysis':
     x= helper.most_successful(df, selected_sport)
     st.dataframe(x)
     st.table(x)
+
+    st.title("Overall Athlete Data")
+    st.dataframe(df)
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #--------------------------------------------Country-wise Analysis Section---------------------------------------------------------------------------
