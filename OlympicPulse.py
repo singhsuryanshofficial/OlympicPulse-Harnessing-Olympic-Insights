@@ -269,13 +269,10 @@ if user_menu == 'Athlete-wise Analysis':
 
     #------------------------------------------------------Gold medalists-------------------------------------------------
     st.title('Distribution of Age w.r.t. Sports(Gold Medalists)')
-    
     # Filter data for gold medalists
     gold_medalists = df[df['Medal'] == 'Gold']
-    
     # Group by Sport and Age, then count the occurrences
     sport_age_counts = gold_medalists.groupby(['Sport', 'Age']).size().reset_index(name='Count')
-    
     # Calculate probability distribution for each sport
     sports = sport_age_counts['Sport'].unique()
     sport_age_distributions = {}
@@ -286,7 +283,7 @@ if user_menu == 'Athlete-wise Analysis':
         sport_age_distributions[sport] = age_distribution
         
     # Create Plotly figure for probability distribution
-    fig = go.Figure(show_hist=False, show_rug=False)
+    fig = go.Figure()
     for sport, age_distribution in sport_age_distributions.items():
         fig.add_trace(go.Scatter(x=age_distribution.index, y=age_distribution.values, mode='lines', name=sport))
     
@@ -294,35 +291,38 @@ if user_menu == 'Athlete-wise Analysis':
     st.plotly_chart(fig)
 
     
-    #Silver medalists--------------------------------------------------
-    x2 = []
-    name2 = []
-    for sport in famous_sports:
-        temp_df = athlete_df[athlete_df['Sport'] == sport]
-        gold_medalists_age = temp_df[temp_df['Medal'] == 'Silver']['Age'].dropna()
-        if not gold_medalists_age.empty:
-            x2.append(gold_medalists_age)
-            name2.append(sport)
+    #--------------------Silver medalists--------------------------------------------------
+    st.title('Distribution of Age w.r.t. Sports (Silver Medalists)')
 
-    fig = ff.create_distplot(x2, name2, show_hist=False, show_rug=False)
-    fig.update_layout(autosize=False, width=1100, height=800)  # code to make width and height of graph bigger
-    st.title('Distribution of Age w.r.t. Sports(Silver Medalists)')
-    st.plotly_chart(fig)
-
-    #Bronze medalists---------------------------------------------------
-    x3 = []
-    name3 = []
-    for sport in famous_sports:
-        temp_df = athlete_df[athlete_df['Sport'] == sport]
-        gold_medalists_age = temp_df[temp_df['Medal'] == 'Bronze']['Age'].dropna()
-        if not gold_medalists_age.empty:
-            x3.append(gold_medalists_age)
-            name3.append(sport)
-
-    fig = ff.create_distplot(x3, name3, show_hist=False, show_rug=False)
-    fig.update_layout(autosize=False, width=1100, height=800)  # code to make width and height of graph bigger
-    st.title('Distribution of Age w.r.t. Sports(Bronze Medalists)')
-    st.plotly_chart(fig)
+    # Filter data for gold medalists
+    silver_medalists = df[df['Medal'] == 'Silver']
+    
+    # Group by Sport and Age, then count the occurrences
+    sport_age_counts = silver_medalists.groupby(['Sport', 'Age']).size().reset_index(name='Count')
+    
+    # Calculate probability distribution for each sport
+    sports = sport_age_counts['Sport'].unique()
+    sport_age_distributions = {}
+    for sport in sports:
+        sport_data = sport_age_counts[sport_age_counts['Sport'] == sport]
+        total_count = sport_data['Count'].sum()
+        age_distribution = sport_data.set_index('Age')['Count'] / total_count
+        sport_age_distributions[sport] = age_distribution
+    
+    # Create a line plot using Matplotlib's pyplot
+    plt.figure(figsize=(11, 7))
+    for sport, age_distribution in sport_age_distributions.items():
+        plt.plot(age_distribution.index, age_distribution.values, label=sport)
+    
+    # Set plot title and labels
+    plt.xlabel('Age')
+    plt.ylabel('Probability')
+    
+    # Add legend
+    plt.legend()
+    
+    # Show plot
+    st.pyplot(plt)
 
 
 
