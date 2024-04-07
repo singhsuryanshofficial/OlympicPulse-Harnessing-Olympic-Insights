@@ -290,13 +290,10 @@ if user_menu == 'Athlete-wise Analysis':
     for sport, age_distribution in sport_age_distributions.items():
         fig.add_trace(go.Scatter(x=age_distribution.index, y=age_distribution.values, mode='lines', name=sport))
     
-    # Update layout with specified y-axis tickvals
-    fig.update_layout(title='Probability Distribution of Age w.r.t. Sports (Gold Medalists)',
-                  xaxis_title='Age', yaxis_title='Probability',
-                  yaxis=dict(scaleanchor="x", scaleratio=1, autorange=True))
-    # Streamlit display
+    fig.update_layout(title='Probability Distribution of Age w.r.t. Sports (Gold Medalists)',xaxis_title='Age', yaxis_title='Probability')
     st.plotly_chart(fig)
 
+    
     #Silver medalists--------------------------------------------------
     x2 = []
     name2 = []
