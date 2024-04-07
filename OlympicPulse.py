@@ -139,23 +139,7 @@ if user_menu == 'Overall Analysis':
     st.pyplot(fig)
 
 #--------------------------Table: Most successful atheles in particular sport-------------------------------------------
-    # st.title("Most successful athletes ")
-    # #sport list for select box
-    # sport_list = df['Sport'].unique().tolist()
-    # sport_list.sort()
-    # sport_list.insert(0, 'Overall')
  
-    # selected_sport= st.selectbox("Select a Sport", sport_list)
-
-    # temp_df = df.dropna(subset=['Medal'])
-    # if selected_sport != 'Overall':
-    #         temp_df = temp_df[temp_df['Sport'] == selected_sport]
-    # st.dataframe(temp_df)
-
-
-
-
-
 # Function to filter top athletes based on selected sport
 def get_top_athletes(selected_sport, df):
     filtered_df = df[df['Sport'] == selected_sport]
@@ -164,11 +148,12 @@ def get_top_athletes(selected_sport, df):
     top_athletes = top_athletes.sort_values(by='Total Medals', ascending=False).head(15)
     return top_athletes
 
-# Streamlit app
-st.title('Top 15 Athletes by Sport')
 
 # Sidebar for sport selection
-selected_sport = st.sidebar.selectbox('Select a sport:', df['Sport'].unique())
+selected_sport = st.selectbox('Select a sport:', df['Sport'].unique())
+
+st.title('Top 15 Athletes in ' + selected_sport)
+
 
 # Display top athletes
 if selected_sport:
