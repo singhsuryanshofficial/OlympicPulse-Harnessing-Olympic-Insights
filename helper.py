@@ -91,9 +91,13 @@ def athletes_over_time(df):
 #--------------------------Function: Most successful atheles in particular sport----------------------------------------
 # --------------Function to filter top athletes based on selected sport
 def get_top_athletes(selected_sport, df):
-    filtered_df = df[df['Sport'] == selected_sport]
-    top_athletes = filtered_df.groupby('Name').agg({'Gold': 'sum', 'Silver': 'sum', 'Bronze': 'sum'}).reset_index()
-    top_athletes['Total Medals'] = top_athletes['Gold'] + top_athletes['Silver'] + top_athletes['Bronze']
+    if selected_sport == 'Overall':
+        top_athletes = df.groupby('Name').agg({'Gold': 'sum', 'Silver': 'sum', 'Bronze': 'sum'}).reset_index()
+        top_athletes['Total Medals'] = top_athletes['Gold'] + top_athletes['Silver'] + top_athletes['Bronze']
+    else:
+        filtered_df = df[df['Sport'] == selected_sport]
+        top_athletes = filtered_df.groupby('Name').agg({'Gold': 'sum', 'Silver': 'sum', 'Bronze': 'sum'}).reset_index()
+        top_athletes['Total Medals'] = top_athletes['Gold'] + top_athletes['Silver'] + top_athletes['Bronze']
     top_athletes = top_athletes.sort_values(by='Total Medals', ascending=False).head(15)
     return top_athletes
 
