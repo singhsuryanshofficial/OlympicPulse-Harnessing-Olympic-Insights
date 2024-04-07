@@ -149,7 +149,7 @@ if user_menu == 'Overall Analysis':
 
     temp_df = df.dropna(subset=['Medal'])
     if sport != 'Overall':
-            temp_df = temp_df[temp_df['Sport'] == sport]
+            temp_df = temp_df[temp_df['Sport'] == selected_sport]
     st.dataframe(temp_df)
     #x= most_successful(df, 'Overall')
     #st.dataframe(x)
