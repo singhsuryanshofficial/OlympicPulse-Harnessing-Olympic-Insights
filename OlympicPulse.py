@@ -139,32 +139,45 @@ if user_menu == 'Overall Analysis':
     st.pyplot(fig)
 
 #--------------------------Table: Most successful atheles in particular sport-------------------------------------------
-    st.title("Most successful athletes ")
-    #sport list for select box
-    sport_list = df['Sport'].unique().tolist()
-    sport_list.sort()
-    sport_list.insert(0, 'Overall')
+    # st.title("Most successful athletes ")
+    # #sport list for select box
+    # sport_list = df['Sport'].unique().tolist()
+    # sport_list.sort()
+    # sport_list.insert(0, 'Overall')
  
-    selected_sport= st.selectbox("Select a Sport", sport_list)
+    # selected_sport= st.selectbox("Select a Sport", sport_list)
 
-    temp_df = df.dropna(subset=['Medal'])
-    if selected_sport != 'Overall':
-            temp_df = temp_df[temp_df['Sport'] == selected_sport]
-    st.dataframe(temp_df)
-    #x= most_successful(df, 'Overall')
-    #st.dataframe(x)
-    #st.table(x)
+    # temp_df = df.dropna(subset=['Medal'])
+    # if selected_sport != 'Overall':
+    #         temp_df = temp_df[temp_df['Sport'] == selected_sport]
+    # st.dataframe(temp_df)
 
-    #st.title("Overall Athlete Data")
-    #st.dataframe(df)
 
-    # def most_successful(df, sport):
-    #      # eliminate nan values of medal
-    #       # removed all other rows (except input sport)
-    
-    #     x = temp_df['Name'].value_counts().reset_index().head(15).merge(df, left_on='index', right_on='Name', how='left')[['index', 'Name_x', 'Sport', 'Region']].drop_duplicates('index')
-    #     x.rename(columns={'index': 'Name', 'Name_x': 'Medals'}, inplace=True)
-    #     return x
+
+
+
+# Function to filter top athletes based on selected sport
+def get_top_athletes(selected_sport, df):
+    filtered_df = df[df['Sport'] == selected_sport]
+    top_athletes = filtered_df.groupby('Name').agg({'Gold': 'sum', 'Silver': 'sum', 'Bronze': 'sum'}).reset_index()
+    top_athletes['Total Medals'] = top_athletes['Gold'] + top_athletes['Silver'] + top_athletes['Bronze']
+    top_athletes = top_athletes.sort_values(by='Total Medals', ascending=False).head(15)
+    return top_athletes
+
+# Streamlit app
+st.title('Top 15 Athletes by Sport')
+
+# Sidebar for sport selection
+selected_sport = st.sidebar.selectbox('Select a sport:', df['Sport'].unique())
+
+# Display top athletes
+if selected_sport:
+    st.subheader(f'Top 15 Athletes in {selected_sport}')
+    top_athletes_df = get_top_athletes(selected_sport, df)
+    st.table(top_athletes_df[['Name', 'Gold', 'Silver', 'Bronze', 'Total Medals']])
+else:
+    st.write('Please select a sport from the sidebar.')
+
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #--------------------------------------------Country-wise Analysis Section---------------------------------------------------------------------------
