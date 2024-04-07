@@ -197,21 +197,31 @@ if user_menu == 'Country-wise Analysis':
 
 #--------------------Top 10 atheletes of country based on sports--------------------------------------------------------
 
-# # Sidebar for country selection
-# selected_country = st.sidebar.selectbox('Select a country:', df['Noc'].unique())   #country code already mentioned above
 
-# Streamlit app
+
+
+
+
+# Function to filter top athletes based on selected country
+def top_athletes_countrywise(selected_country, df):
+    filtered_df = df[df['Noc'] == selected_country]
+    top_athletes = filtered_df.groupby('Name').agg({'Gold': 'sum', 'Silver': 'sum', 'Bronze': 'sum'}).reset_index()
+    top_athletes['Total Medals'] = top_athletes['Gold'] + top_athletes['Silver'] + top_athletes['Bronze']
+    top_athletes = top_athletes.sort_values(by='Total Medals', ascending=False).head(10)
+    return top_athletes
+
 st.title('Top 10 Athletes of ' + selected_country)
 
+# Sidebar for country selection
+selected_country = st.sidebar.selectbox('Select a country:', df['Noc'].unique())
 
 # Display top athletes
 if selected_country:
     st.subheader(f'Top 10 Athletes from {selected_country}')
-    top_athletes_df = helper.top_athletes_countrywise(selected_country, df)
+    top_athletes_df = top_athletes_countrywise(selected_country, df)
     st.table(top_athletes_df[['Name', 'Gold', 'Silver', 'Bronze', 'Total Medals']])
 else:
     st.write('Please select a country from the sidebar.')
-
 
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
