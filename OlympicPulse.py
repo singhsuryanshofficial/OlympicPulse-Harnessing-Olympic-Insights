@@ -238,13 +238,14 @@ if user_menu == 'Athlete-wise Analysis':
 # import pandas as pd
 # import plotly.figure_factory as ff
 
-# Assuming df is your dataframe containing the dataset
+# Load the dataset
+
 
     st.title('Distribution of Age')
     
-    # Drop duplicates based on 'Name' and 'Region' to get unique athletes
+    # Drop duplicates based on 'Name' and 'Team' to get unique athletes
     athlete_df = df.drop_duplicates(subset=['Name', 'Team'])
-    
+    st.dataframe(athlete_df)
     # PDF for overall age distribution
     x1 = athlete_df['Age'].dropna()
     
