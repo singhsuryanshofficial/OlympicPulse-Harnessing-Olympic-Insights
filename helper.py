@@ -97,7 +97,7 @@ def most_successful(df, sport):
         temp_df = temp_df[temp_df['Sport'] == sport]  # Filter by sport if specified
         print(temp_df)
     # Count the number of medals for each athlete, select the top 15, and merge with the original DataFrame
-    x = temp_df['Name'].value_counts().reset_index().head(15).merge(df, left_index=True, right_on='Name', how='left')
+    x = temp_df['Name'].value_counts().reset_index().head(15) #.merge(df, left_index=True, right_on='Name', how='left')
     
     # Select desired columns and drop duplicates based on athlete's name
     x = x[['Name_x', 'Sport', 'Region']].drop_duplicates('Name_x')
