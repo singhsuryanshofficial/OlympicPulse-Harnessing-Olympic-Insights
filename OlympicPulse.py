@@ -45,8 +45,8 @@ df = preprocessor.preprocess(df , region_df)
 #if Medal Tally is clicked then we display the medals_tally of every country
 if user_menu == 'Medal Tally':
     st.sidebar.header("Medal Tally Options ")
-
-    # -------------------------------------------Year and COuntry Dropdowns
+    
+    # -------------------------------------------Year and Country Dropdowns
     years, country = helper.country_year_list(df)
     selected_year = st.sidebar.selectbox("Select Year: ", years)
     selected_country = st.sidebar.selectbox("Select Country: ", country)
@@ -122,7 +122,7 @@ if user_menu == 'Overall Analysis':
     fig = px.line(events_over_time, x="Edition", y="Total Events")
     st.plotly_chart(fig)
 
-#--------------------------Line Chart-> No. of Athletes Over the Years--------------------------------------------------
+#--------------------------Line Chart-> No. of Athletes Over the Years---------------------------------------------------
     st.title("Number of athletes over the years")
     
     athlete_over_time = helper.athletes_over_time(df)
@@ -130,10 +130,10 @@ if user_menu == 'Overall Analysis':
     st.dataframe(athlete_over_time)
     athlete_over_time = athlete_over_time.sort_values('Edition')  #here event is for year
     
-    
     fig = px.line(athlete_over_time, x="Edition", y="Participating Athletes")
     st.plotly_chart(fig)
-#--------------------------HeatMap-> No. of Events of one sport---------------------------------------------------------
+    
+#--------------------------HeatMap-> No. of Events of one sport----------------------------------------------------------
     st.title("Number of events in all sports over the years")
     fig,ax=plt.subplots(figsize=(20,20))
     x = df.drop_duplicates(['Year', 'Sport', 'Event'])
@@ -292,7 +292,7 @@ if user_menu == 'Athlete-wise Analysis':
 
     
     #--------------------Silver medalists--------------------------------------------------
-    st.title('Distribution of Age w.r.t. Sports(Gold Medalists)')
+    st.title('Distribution of Age w.r.t. Sports(Silver Medalists)')
     # Filter data for silver medalists
     silver_medalists = df[df['Medal'] == 'Silver']
     
@@ -319,6 +319,30 @@ if user_menu == 'Athlete-wise Analysis':
     # Streamlit display
     st.plotly_chart(fig)
 
+    #--------------------Bronze medalists--------------------------------------------------
+    st.title('Distribution of Age w.r.t. Sports(Bronze Medalists)')
+    bronze_medalists = df[df['Medal'] == 'Bronze']
+    # Group by Sport and Age, then count the occurrences
+    sport_age_counts = bronze_medalists.groupby(['Sport', 'Age']).size().reset_index(name='Count')
+    
+    # Calculate probability distribution for each sport
+    sports = sport_age_counts['Sport'].unique()
+    sport_age_distributions = {}
+    for sport in sports:
+        sport_data = sport_age_counts[sport_age_counts['Sport'] == sport]
+        total_count = sport_data['Count'].sum()
+        age_distribution = sport_data.set_index('Age')['Count'] / total_count
+        sport_age_distributions[sport] = age_distribution
+    
+    # Create Plotly figure for probability distribution of bronze medalists
+    fig = go.Figure()
+    for sport, age_distribution in sport_age_distributions.items():
+        fig.add_trace(go.Scatter(x=age_distribution.index, y=age_distribution.values, mode='lines', name=sport))
+    
+    # Update layout
+    fig.update_layout(xaxis_title='Age', yaxis_title='Probability',autosize=False, width=1100, height=700)
+    # Streamlit display
+    st.plotly_chart(fig)
 
 
 #---------------- GRAPH Plot: For a particular sport: Height vs Weight--------------------------------------------------
