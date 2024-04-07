@@ -221,24 +221,22 @@ if user_menu == 'Athlete-wise Analysis':
     st.dataframe(athlete_df)
       
 #----------------PDF(probability Distrubtion of athletes' age who have participate in Olympic)--------------------------
-#     st.title('Distribution of Age')
-#     athlete_df = df.drop_duplicates(subset=['Name', 'Region'])
-#     st.dataframe(athlete_df)
 
-#     #PDF(probability Distrubtion  of age
-#     x1= athlete_df['Age'].dropna()
-#     #PDF for age distribution of gold medalists
-#     x2 = athlete_df[athlete_df['Medal'] == 'Gold']['Age'].dropna()
-#     #PDF for age distribution of silver medalists
-#     x3 = athlete_df[athlete_df['Medal'] == 'Silver']['Age'].dropna()
-#     #PDF for age distribution of bronze medalists
-#     x4 = athlete_df[athlete_df['Medal'] == 'Bronze']['Age'].dropna()
 
-#     fig = ff.create_distplot([x1,x2,x3,x4], ['Overall Age', 'Gold Medalish', 'Silver Medalist', 'Bronze Medalist'], show_hist= False, show_rug= False)
+    #PDF(probability Distrubtion  of age
+    x1= athlete_df['Age'].dropna()
+    #PDF for age distribution of gold medalists
+    # x2 = athlete_df[athlete_df['Medal'] == 'Gold']['Age'].dropna()
+    # #PDF for age distribution of silver medalists
+    # x3 = athlete_df[athlete_df['Medal'] == 'Silver']['Age'].dropna()
+    # #PDF for age distribution of bronze medalists
+    # x4 = athlete_df[athlete_df['Medal'] == 'Bronze']['Age'].dropna()
 
-#     fig.update_layout(autosize = False, width= 1100, height = 800)  #code to make width and height of graph bigger
+    fig = ff.create_distplot([x1], ['Overall Age'], show_hist= False, show_rug= False)
+
+    fig.update_layout(autosize = False, width= 1100, height = 800)  #code to make width and height of graph bigger
   
-#     st.plotly_chart(fig)
+    st.plotly_chart(fig)
 
 
 
